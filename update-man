@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -xo pipefail
+
+die()
+{
+  set +x
+  echo 'ERROR' 1>&2
+  exit "$1"
+}
+
+if test -e man; then
+    rm -r man || die $?
+fi
+
+mkdir man || die $?
+cd man || die $?
+wget -O - 'https://github.com/bup/bup/tarball/html' \
+    | tar --strip-components=1 -xzf - || die $?
