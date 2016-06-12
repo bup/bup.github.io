@@ -28,9 +28,9 @@ print """<!doctype html>'
       <div id="header">
         <nav>
           <li class="fork"><a href="https://github.com/bup/bup">SOURCE</a></li>
-          <li class="downloads"><a href="https://github.com/bup/bup/zipball/0.28">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/bup/bup/tarball/0.28">TAR</a></li>
-          <li class="title">RELEASE (0.28)</li>
+          <li class="downloads"><a href="https://github.com/bup/bup/zipball/0.28.1">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/bup/bup/tarball/0.28.1">TAR</a></li>
+          <li class="title">RELEASE (0.28.1)</li>
         </nav>
       </div><!-- end header -->
     <div class="wrapper">
