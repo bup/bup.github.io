@@ -1,12 +1,52 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 from os.path import basename
 import sys
 
 
-pages = sys.argv[1:]
+def render_cmd(subcmd, page_dir, indent):
+    cmd_name = 'bup ' + subcmd if subcmd else 'bup'
+    subcmd_name = subcmd and subcmd.split()[0] or None
+    page_name = 'bup-' + subcmd_name if subcmd_name else 'bup'
+    print('%s<li><a href="%s/%s.html">%s</a></li>'
+                  % ((' ' * indent), page_dir, page_name, cmd_name))
 
-print """<!doctype html>'
+def render_sections(sections, other, requested_cmds, page_dir, indent=0):
+    rendered = set()
+    for section in sections:
+        sec_name, cmds = section
+        print('%s<h3>%s</h3>' % ((' ' * indent), sec_name))
+        print('%s<ul>' % (' ' * indent))
+        for cmd in cmds:
+            cmd_name = cmd and cmd.split()[0] or None
+            if cmd_name not in requested_cmds:
+                continue
+            render_cmd(cmd, page_dir, indent + 2)
+            rendered.add(cmd_name)
+        print('%s</ul>' % (' ' * indent))
+    remaining_cmds = requested_cmds - rendered
+    if remaining_cmds:
+        print('%s<h3>%s</h3>' % ((' ' * indent), other))
+        print('%s<ul>' % (' ' * indent))
+        for cmd in sorted(remaining_cmds):
+            render_cmd(cmd, page_dir, indent + 2)
+        print('%s</ul>' % (' ' * indent))
+
+def cmd_from_html_path(x):
+    assert(x.endswith('.html'))
+    base = basename(x)
+    assert(base.startswith('bup-') or base == 'bup.html')
+    return base[4:-5] or None
+
+
+# Usage: create-man-index DIR_CONTAINING_HTML_PAGES HTML_PAGES_TO_INCLUDE...
+# e.g. create-man-index man $(git ls-files 'man/*.html')
+
+page_dir = sys.argv[1]
+pages = sys.argv[2:]
+
+print("""<!doctype html>'
 <html>
   <head>
     <meta charset="utf-8">
@@ -41,20 +81,45 @@ print """<!doctype html>'
           <hr>
           <span class="credits left">Contact us on the <a href="https://groups.google.com/forum/#!forum/bup-list">mailing list</a></span>
           <span class="credits right">Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-        <h1>Man pages</h1>
-        <ul>
-"""
+        </div>""")
 
-for page in pages:
-    cmd = basename(page)[:-5] + '(1)'
-    print '          <li><a href="{}">{}</a></li>'.format(page, cmd)
+known_sections = [['Common operations',
+                   [None,
+                    'help',
+                    'init',
+                    'fsck',
+                    'tag',
+                    'version']],
+                  ['Inspection',
+                   ['ls',
+                    'fuse',
+                    'web',
+                    'ftp']],
+                  ['Save and restore',
+                   ['index',
+                    'on [HOST index]',
+                    'save',
+                    'on [HOST save]',
+                    'restore']],
+                  ['Split and join',
+                   ['split',
+                    'join']],
+                  ['Importing data',
+                   ['import-duplicity',
+                    'import-rdiff-backup',
+                    'import-rsnapshot']],
+                  ['Pruning old data (destructive and EXPERIMENTAL)',
+                   ['rm',
+                    'gc',
+                    'prune-older']]]
 
-print """
-        </ul>
+requested_cmds = frozenset((cmd_from_html_path(x) for x in pages))
+render_sections(known_sections, 'Others', requested_cmds, page_dir, 8)
+
+print("""
       </section>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
   </body>
 </html>
-"""
+""")
