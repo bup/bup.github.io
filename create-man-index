@@ -43,8 +43,9 @@ def cmd_from_html_path(x):
 # Usage: create-man-index DIR_CONTAINING_HTML_PAGES HTML_PAGES_TO_INCLUDE...
 # e.g. create-man-index man $(git ls-files 'man/*.html')
 
-page_dir = sys.argv[1]
-pages = sys.argv[2:]
+version = sys.argv[1]
+page_dir = sys.argv[2]
+pages = sys.argv[3:]
 
 print("""<!doctype html>'
 <html>
@@ -68,9 +69,9 @@ print("""<!doctype html>'
       <div id="header">
         <nav>
           <li class="fork"><a href="https://github.com/bup/bup">SOURCE</a></li>
-          <li class="downloads"><a href="https://github.com/bup/bup/zipball/0.29.1">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/bup/bup/tarball/0.29.1">TAR</a></li>
-          <li class="title">RELEASE (0.29.1)</li>
+          <li class="downloads"><a href="https://github.com/bup/bup/zipball/%(version)s">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/bup/bup/tarball/%(version)s">TAR</a></li>
+          <li class="title">RELEASE (%(version)s)</li>
         </nav>
       </div><!-- end header -->
     <div class="wrapper">
@@ -81,7 +82,7 @@ print("""<!doctype html>'
           <hr>
           <span class="credits left">Contact us on the <a href="https://groups.google.com/forum/#!forum/bup-list">mailing list</a></span>
           <span class="credits right">Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>""")
+        </div>""" % {'version' : version})
 
 known_sections = [['Common operations',
                    [None,
