@@ -2,7 +2,7 @@
 SHELL := bash
 
 # For now we just assume that this matches the tip of the man branch.
-bup_ver := 0.29.3
+bup_ver := 0.30
 
 .PHONY: all
 all:
