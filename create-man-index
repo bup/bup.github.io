@@ -108,7 +108,7 @@ known_sections = [['Common operations',
                    ['import-duplicity',
                     'import-rdiff-backup',
                     'import-rsnapshot']],
-                  ['Pruning old data (destructive and EXPERIMENTAL)',
+                  ['Pruning old data (destructive)',
                    ['rm',
                     'gc',
                     'prune-older']]]
