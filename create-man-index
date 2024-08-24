@@ -59,11 +59,6 @@ print("""<!doctype html>'
     <title>bup man pages</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/jquery-1.7.1.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
@@ -124,7 +119,6 @@ render_sections(known_sections, 'Others', requested_cmds, page_dir, 8)
 print("""
       </section>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
   </body>
 </html>
 """)
