@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
 from os.path import basename
-import sys
+import re, sys
 
 
 def render_cmd(subcmd, page_dir, indent):
-    cmd_name = 'bup ' + subcmd if subcmd else 'bup'
-    subcmd_name = subcmd and subcmd.split()[0] or None
-    page_name = 'bup-' + subcmd_name if subcmd_name else 'bup'
+    if subcmd:
+        subcmd_and_sec = subcmd.split()[0]
+        cmd_name = 'bup ' + re.sub(r'^([^.]+)\.[0-9]+', r'\1', subcmd)
+        page_name = 'bup-' + subcmd_and_sec
+    else:
+        page_name = cmd_name = 'bup'
     print('%s<li><a href="%s/%s.html">%s</a></li>'
                   % ((' ' * indent), page_dir, page_name, cmd_name))
 
@@ -35,7 +38,9 @@ def render_sections(sections, other, requested_cmds, page_dir, indent=0):
 def cmd_from_html_path(x):
     assert(x.endswith('.html'))
     base = basename(x)
-    assert(base.startswith('bup-') or base == 'bup.html')
+    if base == 'bup.1.html':
+        return None
+    assert(base.startswith('bup-'))
     return base[4:-5] or None
 
 
@@ -84,34 +89,34 @@ print("""<!doctype html>'
         </div>""" % {'version' : version})
 
 known_sections = [['Common operations',
-                   [None,
-                    'help',
-                    'init',
-                    'fsck',
-                    'tag',
-                    'version']],
+                   [None, # bup(1) -- (no subcommand)
+                    'help.1',
+                    'init.1',
+                    'fsck.1',
+                    'tag.1',
+                    'version.1']],
                   ['Inspection',
-                   ['ls',
-                    'fuse',
-                    'web',
-                    'ftp']],
+                   ['ls.1',
+                    'fuse.1',
+                    'web.1',
+                    'ftp.1']],
                   ['Save and restore',
-                   ['index',
-                    'on [HOST index]',
-                    'save',
-                    'on [HOST save]',
-                    'restore']],
+                   ['index.1',
+                    'on.1 [HOST index]',
+                    'save.1',
+                    'on.1 [HOST save]',
+                    'restore.1']],
                   ['Split and join',
-                   ['split',
-                    'join']],
+                   ['split.1',
+                    'join.1']],
                   ['Importing data',
-                   ['import-duplicity',
-                    'import-rdiff-backup',
-                    'import-rsnapshot']],
+                   ['import-duplicity.1',
+                    'import-rdiff-backup.1',
+                    'import-rsnapshot.1']],
                   ['Pruning old data (destructive)',
-                   ['rm',
-                    'gc',
-                    'prune-older']]]
+                   ['rm.1',
+                    'gc.1',
+                    'prune-older.1']]]
 
 requested_cmds = frozenset((cmd_from_html_path(x) for x in pages))
 render_sections(known_sections, 'Others', requested_cmds, page_dir, 8)
