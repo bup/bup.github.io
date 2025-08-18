@@ -6,11 +6,13 @@ import re, sys
 
 def render_cmd(subcmd, page_dir, indent):
     if subcmd:
+        # split handles "bup on [HOST index]", etc.
         subcmd_and_sec = subcmd.split()[0]
         cmd_name = 'bup ' + re.sub(r'^([^.]+)\.[0-9]+', r'\1', subcmd)
-        page_name = 'bup-' + subcmd_and_sec
+        page_name = f'bup-{subcmd_and_sec}'
     else:
-        page_name = cmd_name = 'bup'
+        cmd_name = 'bup'
+        page_name = 'bup.1'
     print('%s<li><a href="%s/%s.html">%s</a></li>'
                   % ((' ' * indent), page_dir, page_name, cmd_name))
 
