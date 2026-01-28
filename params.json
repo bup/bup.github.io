@@ -1,6 +1,6 @@
 {
     "name":"Bup",
-    "tagline":"Very efficient backup system based on the git packfile format, providing fast incremental saves and global deduplication (among and within files, including virtual machine images). Current release is 0.33.9, and the development branch is main. Please post patches to the mailing list for discussion (see below).","body":"For more information about bup's internal design, see [the current DESIGN document](https://raw.githubusercontent.com/bup/bup/main/DESIGN)",
+    "tagline":"Very efficient backup system based on the git packfile format, providing fast incremental saves and global deduplication (among and within files, including virtual machine images). Current release is 0.33.10, and the development branch is main. Please post patches to the mailing list for discussion (see below).","body":"For more information about bup's internal design, see [the current DESIGN document](https://raw.githubusercontent.com/bup/bup/main/DESIGN)",
     "google": "",
     "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
