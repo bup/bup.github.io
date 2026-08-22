@@ -38,11 +38,11 @@ def render_sections(sections, other, requested_cmds, page_dir, indent=0):
         print('%s</ul>' % (' ' * indent))
 
 def cmd_from_html_path(x):
-    assert(x.endswith('.html'))
+    assert x.endswith('.html'), x
     base = basename(x)
     if base == 'bup.1.html':
         return None
-    assert(base.startswith('bup-'))
+    assert base.startswith('bup-'), base
     return base[4:-5] or None
 
 

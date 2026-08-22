@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>bup, it backs things up!</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/bup/bup">SOURCE</a></li>
+          <li class="downloads"><a href="https://github.com/bup/bup/archive/@@VERSION@@.zip">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/bup/bup/archive/@@VERSION@@.tar.gz">TAR</a></li>
+          <li class="title">DOWNLOAD (@@VERSION@@)</li>
+        </nav>
+      </div><!-- end header -->
+    <div class="wrapper">
+      <section>
+        <div id="title">
+          <h1>bup</h1>
+          <p>Very efficient backup system based on the git packfile format, providing fast incremental saves and global deduplication (among and within files, including virtual machine images).</p>
+          <hr>
+          <span class="credits right">Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+        <h1 id="Documentation">Documentation</h1>
+        <ul>
+          <li>
+            <a href="https://github.com/bup/bup/blob/main/README.md">
+              Overview
+            </a>
+          </li>
+          <li><a href="man.html">Man pages</a></li>
+          <li>
+            <a href="https://github.com/bup/bup/blob/main/README.md#how-you-can-help">
+              How to help
+            </a>
+          </li>
+          <li>
+            <a href="https://raw.githubusercontent.com/bup/bup/main/DESIGN">
+              Internal DESIGN
+            </a>
+          </li>
+        </ul>
+        <h1 id="Related_Projects">Related Projects</h1>
+        <dl>
+          <dt><a href="http://src.anarc.at/bup-cron.git/">bup-cron</a></dt>
+          <dd>
+            A simple wrapper around bup to make it easier to run
+            nightly backup jobs. While it's designed to run under
+            cron, it can also be called directly.
+          </dd>
+          <dt>
+            <a href="http://kde-apps.org/content/show.php/Kup+Backup+System?content=147465">
+              Kup
+            </a>
+          </dt>
+          <dd>A KDE front end.</dd>
+          <dt>
+            <a href="https://github.com/emersion/bups">
+              Bups
+            </a>
+          </dt>
+          <dd>A GTK3 front end.</dd>
+          <dt>
+            <a href="https://github.com/tobru/bupper">
+              bupper
+            </a>
+          </dt>
+          <dd>
+            A CLI wrapper to bup that lets you set backup profiles in a
+            configuration file. Each profile can also call pre- and post-backup
+            scripts.
+          </dd>
+          <dt>
+            <a href="https://github.com/skorokithakis/encbup">
+              encbup
+            </a>
+          </dt>
+          <dd>
+            A script that ingests files from disk and outputs an encrypted
+            stream to a file or to stdout. You can then pass this on to bup
+            split.
+          </dd>
+          <dt>
+            <a href="https://git-annex.branchable.com/">
+              git-annex
+            </a>
+          </dt>
+          <dd>
+            git-annex manages distributed copies of files using git
+            (particularly large files, e.g. audio, video, images).
+            Among other things, it supports partial checkouts and
+            automatic checks to make sure that deleting a local copy
+            of a file won't break rules you've established, like
+            "there must always be at least 3 copies of any given
+            photo, across all of my known checkouts".
+
+            git-annex has configurable storage backends, and bup is
+            one of the options.
+          </dd>
+          <dt>
+            <a href="https://git-annex.branchable.com/assistant/">
+              git-annex assistant
+            </a>
+          </dt>
+          <dd>
+            The git-annex assistant turns git-annex into an easy to
+            use folder synchroniser that works across Linux and OSX
+            computers, Android devices, removable drives, NAS
+            appliances, and cloud services.
+          </dd>
+        </dl>
+        <h1 id="Contact_Us">Contact Us</h1>
+        <ul>
+          <li>
+            <a href="https://groups.google.com/forum/#!forum/bup-list">
+              Mailing list
+            </a>
+          </li>
+          <li>
+            <a href="https://web.libera.chat/?channels=#bup">#bup</a>
+            on <a href="https://libera.chat">Libera.chat</a>
+          </li>
+        </ul>
+        <h1 id="Older_Realeases">Older Releases</h1>
+        <p>
+          If you're looking for a previous bup release, you can head over to the
+          project's <a href="https://github.com/bup/bup/tags">releases</a>
+          page.
+        </p>
+      </section>
+    </div>
+  </body>
+</html>

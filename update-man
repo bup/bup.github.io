@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 
-set -xo pipefail
+set -uexo pipefail
 
-die()
-{
-  set +x
-  echo 'ERROR' 1>&2
-  exit "$1"
-}
+usage() { echo 'Usage: update-man BUP_REPO DOC_REF'; }
+misuse() { usage 1>&2; exit 2; }
 
-if test -e man; then
-    rm -r man || die $?
-fi
+test $# -eq 2 || misuse
+repo="$1"
+ref="$2"
 
-mkdir man || die $?
-cd man || die $?
-wget -O - 'https://github.com/bup/bup/tarball/html' \
-    | tar --strip-components=1 -xzf - || die $?
+rm -rf man
+mkdir man
+
+git -C "$repo" archive "$ref" -- html \
+    | tar -C man -xvf - --strip-components=1

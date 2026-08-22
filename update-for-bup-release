@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -uexo pipefail
+
+# Example: ./update-for-bup-release ../main doc/gen/main
+
+usage() { echo 'Usage: update-for-buprelease BUP_REPO DOC_REF VERSION'; }
+misuse() { usage 1>&2; exit 2; }
+
+if test "$(git status --porcelain)"; then
+    echo "error: tree is not clean" 1>&2
+    git status
+    exit 2
+fi
+
+test $# -eq 2 || misuse
+repo="$1"
+ref="$2"
+
+ver="$(git -C "$repo" show "$ref:version")"
+test "$ver"
+
+./update-man "$repo" "$ref"
+git add man
+./create-man-index "$ver" man man/*.html > man.html
+git commit -sam "Update manpages for $ver"
+
+for f in index.html params.json; do
+    sed -e "s/@@VERSION@@/$ver/" < "$f.in" > "$f"
+done
+if test "$(git status --porcelain)"; then
+    git commit -sam "Update index and params for $ver"
+fi
+
+set +x
+cat <<EOF
+
+Now grep for and fix any other inappropriate references to the
+previous version.
+
+EOF
