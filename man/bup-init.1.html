@@ -5,8 +5,8 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Avery Pennarun apenwarr@gmail.com" />
-  <meta name="dcterms.date" content="2026-01-28" />
-  <title>bup-init(1) Bup 0.33.10</title>
+  <meta name="dcterms.date" content="2026-09-01" />
+  <title>bup-init(1) Bup 0.34</title>
   <style>
     html {
       color: #1a1a1a;
@@ -172,35 +172,39 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">bup-init(1) Bup 0.33.10</h1>
+<h1 class="title">bup-init(1) Bup 0.34</h1>
 <p class="author">Avery Pennarun <a href="mailto:apenwarr@gmail.com"
 class="email">apenwarr@gmail.com</a></p>
-<p class="date">2026-01-28</p>
+<p class="date">2026-09-01</p>
 </header>
 <h1 id="name">NAME</h1>
 <p>bup-init - initialize a bup repository</p>
 <h1 id="synopsis">SYNOPSIS</h1>
-<p>[BUP_DIR=<em>localpath</em>] bup init [-r
-<em>host</em>:<em>path</em>]</p>
+<p>bup init [-r <em>host</em>:<em>path</em>] [<em>directory</em>]</p>
 <h1 id="description">DESCRIPTION</h1>
-<p><code>bup init</code> initializes your local bup repository. By
-default, BUP_DIR is <code>~/.bup</code>.</p>
+<p><code>bup init</code> initializes a repository. The location will be
+the <code>*directory*</code> or <code>--remote</code> if provided, the
+directory specifed by any global <code>-d</code> argument (see
+<code>bup</code>(1)), the value of <code>BUP_DIR</code> in the
+environment if set, or <code>~/.bup</code>.</p>
+<p>See <code>bup-config(5)</code> for configuration options that you may
+want to set. Some, like <code>bup.split.files</code> and
+<code>bup.split.trees</code> should normally be set (when desired)
+before adding data to the repository.</p>
 <h1 id="options">OPTIONS</h1>
 <dl>
-<dt>-r, --remote=<em>host</em>:<em>path</em></dt>
+<dt>-r, --remote=[<em>user</em>@]<em>host</em>:[<em>path</em>],
+--remote=URL</dt>
 <dd>
-Initialize not only the local repository, but also the remote repository
-given by the <em>host</em> and <em>path</em>. This is not necessary if
-you intend to back up to the default location on the server (ie. a blank
-<em>path</em>). The connection to the remote server is made with SSH. If
-you’d like to specify which port, user or private key to use for the SSH
-connection, we recommend you use the <code>~/.ssh/config</code> file.
+Initialize the specified <em>path</em> on the given <em>host</em>.
+Incompatible with <em>directory</em>. See bup(1) REMOTE OPTIONS for
+further information.
 </dd>
 </dl>
 <h1 id="examples">EXAMPLES</h1>
-<pre><code>bup init</code></pre>
+<pre><code>bup init ~/archive</code></pre>
 <h1 id="see-also">SEE ALSO</h1>
-<p><code>bup-fsck</code>(1), <code>ssh_config</code>(5)</p>
+<p><code>bup-config(5)</code>, <code>ssh_config</code>(5)</p>
 <h1 id="bup">BUP</h1>
 <p>Part of the <code>bup</code>(1) suite.</p>
 </body>
